@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VisualState", "VisualState\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Horizontal", "Horizontal\Horizontal.csproj", "{36142ECA-FE59-4FE4-8F9F-1412F755FF16}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Toolbars", "Toolbars\Toolbars.csproj", "{4421D26A-3938-4A79-9665-E2F14020F3BC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Toolbars", "Toolbars\Toolbars.csproj", "{4421D26A-3938-4A79-9665-E2F14020F3BC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OSVersion", "OSVersion\OSVersion.csproj", "{3533C694-1326-4057-82E0-B5F2F788BB63}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,6 +43,12 @@ Global
 		{4421D26A-3938-4A79-9665-E2F14020F3BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4421D26A-3938-4A79-9665-E2F14020F3BC}.Release|Any CPU.Build.0 = Release|Any CPU
 		{4421D26A-3938-4A79-9665-E2F14020F3BC}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{3533C694-1326-4057-82E0-B5F2F788BB63}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3533C694-1326-4057-82E0-B5F2F788BB63}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3533C694-1326-4057-82E0-B5F2F788BB63}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{3533C694-1326-4057-82E0-B5F2F788BB63}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3533C694-1326-4057-82E0-B5F2F788BB63}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3533C694-1326-4057-82E0-B5F2F788BB63}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
