@@ -19,6 +19,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Focused", "Focused\Focused.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Analyzers", "Analyzers\Analyzers.csproj", "{4C52DB6D-19D5-46EF-9314-E7A7B7D3C638}"
 EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "OSVersion.Shared", "OSVersion.Shared\OSVersion.Shared.shproj", "{F41E9128-6424-4139-B03C-ACF072915637}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -79,5 +81,9 @@ Global
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {EAFF1F40-A0A3-46D6-B210-C1CC4BD526CB}
+	EndGlobalSection
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		OSVersion.Shared\OSVersion.Shared.projitems*{3533c694-1326-4057-82e0-b5f2f788bb63}*SharedItemsImports = 5
+		OSVersion.Shared\OSVersion.Shared.projitems*{f41e9128-6424-4139-b03c-acf072915637}*SharedItemsImports = 13
 	EndGlobalSection
 EndGlobal

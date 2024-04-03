@@ -1,9 +1,14 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using System.Runtime.Versioning;
+using Microsoft.Extensions.Logging;
+
+[assembly: UnsupportedOSPlatform("maccatalyst")]
 
 namespace OSVersion
 {
 	public static class MauiProgram
 	{
+		[SupportedOSPlatform("ios")]
+		[SupportedOSPlatform("android")]
 		public static MauiApp CreateMauiApp()
 		{
 			var builder = MauiApp.CreateBuilder();
