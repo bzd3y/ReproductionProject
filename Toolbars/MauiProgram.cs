@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using Microsoft.Maui.Handlers;
 
 namespace Toolbars
 {
@@ -13,6 +14,30 @@ namespace Toolbars
 				{
 					fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
 					fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
+				})
+				.ConfigureMauiHandlers(h =>
+				{
+#if IOS
+					PageHandler.Mapper.PrependToMapping("ToolbarItems", (h, t) =>
+					{
+						h.PlatformView.Superview.LayoutSubviews();
+					});
+
+					ToolbarHandler.Mapper.PrependToMapping("ToolbarItems", (h, t) =>
+					{
+						h.PlatformView.Superview.LayoutSubviews();
+					});
+
+					ToolbarHandler.Mapper.AppendToMapping("ToolbarItems", (h, t) =>
+					{
+						h.PlatformView.Superview.LayoutSubviews();
+					});
+
+					NavigationViewHandler.Mapper.AppendToMapping("ToolbarItems", (h, t) =>
+					{
+						h.PlatformView.Superview.LayoutSubviews();
+					});
+#endif
 				});
 
 #if DEBUG

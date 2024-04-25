@@ -1,27 +1,30 @@
-﻿namespace Toolbars
+﻿using System.Collections.ObjectModel;
+
+namespace Toolbars
 {
 	public partial class MainPage : ContentPage
 	{
 		int count = 0;
 
-		public MainPage() : this(false)
-		{
-
-		}
-
-		public MainPage(bool useIcon)
+		public MainPage()
 		{
 			InitializeComponent();
 
-			ToolbarItems.Add(new("Test", useIcon ? "dotnet_bot.png" : null, async () =>
+			ListView listView = new(ListViewCachingStrategy.RecycleElement)
 			{
-				await Navigation.PushAsync(new NavigationPage(new MainPage(!useIcon)));
+				ItemsSource = new[] { "One", "Two", "Three" }
+			};
+
+			Content = listView;
+
+			ToolbarItems.Add(new("Test", null, async () =>
+			{
+				await Navigation.PushAsync(new NavigationPage(new MainPage()));
 			}));
 
-			if (useIcon == false)
-			{
-				ToolbarItems.Add(new("<- should be text", null, () => { }));
-			}
+			ToolbarItems.Add(new("One", null, () => { }, ToolbarItemOrder.Secondary));
+			ToolbarItems.Add(new("Two", null, () => { }, ToolbarItemOrder.Secondary));
+			ToolbarItems.Add(new("Three", null, () => { }, ToolbarItemOrder.Secondary));
 		}
 
 		private void OnCounterClicked(object sender, EventArgs e)
