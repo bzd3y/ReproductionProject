@@ -1,4 +1,5 @@
-﻿using BackgroundTasks;
+﻿#if IOS
+using BackgroundTasks;
 using Photos;
 
 namespace Sensus.iOS.Shared
@@ -50,3 +51,4 @@ namespace Sensus.iOS.Shared
 		}
 	}
 }
+#endif
