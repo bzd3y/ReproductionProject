@@ -1,5 +1,4 @@
-﻿using System.Collections.ObjectModel;
-
+﻿
 namespace Toolbars
 {
 	public partial class MainPage : ContentPage
@@ -17,9 +16,20 @@ namespace Toolbars
 
 			Content = listView;
 
-			ToolbarItems.Add(new("Test", null, async () =>
+			ToolbarItems.Add(new("Detail/Route", null, async() =>
 			{
-				await Navigation.PushAsync(new NavigationPage(new MainPage()));
+				if (Application.Current?.MainPage is FlyoutPage flyoutPage)
+				{
+					flyoutPage.Detail = new NavigationPage(new ToolbarPage(this) { Title = "Toolbar Page" });
+				}
+				else if (Application.Current?.MainPage is AppShell appShell)
+				{
+					await appShell.GoToAsync(new ShellNavigationState(nameof(ToolbarPage)));
+				}
+			}));
+			ToolbarItems.Add(new("Push", null, async () =>
+			{
+				await Navigation.PushAsync(new ToolbarPage(this));
 			}));
 
 			ToolbarItems.Add(new("One", null, () => { }, ToolbarItemOrder.Secondary));

@@ -1,5 +1,11 @@
 ﻿using Microsoft.Extensions.Logging;
+using Microsoft.Maui.Controls.PlatformConfiguration;
+using Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;
 using Microsoft.Maui.Handlers;
+using FlyoutPage = Microsoft.Maui.Controls.FlyoutPage;
+using Microsoft.Maui.Controls.Handlers.Compatibility;
+using NavigationPage = Microsoft.Maui.Controls.NavigationPage;
+using UIKit;
 
 namespace Toolbars
 {
@@ -18,25 +24,13 @@ namespace Toolbars
 				.ConfigureMauiHandlers(h =>
 				{
 #if IOS
-					PageHandler.Mapper.PrependToMapping("ToolbarItems", (h, t) =>
+					NavigationRenderer.Mapper.PrependToMapping(nameof(NavigationPage.CurrentPage), (h, n) =>
 					{
-						h.PlatformView.Superview.LayoutSubviews();
-					});
-
-					ToolbarHandler.Mapper.PrependToMapping("ToolbarItems", (h, t) =>
-					{
-						h.PlatformView.Superview.LayoutSubviews();
-					});
-
-					ToolbarHandler.Mapper.AppendToMapping("ToolbarItems", (h, t) =>
-					{
-						h.PlatformView.Superview.LayoutSubviews();
-					});
-
-					NavigationViewHandler.Mapper.AppendToMapping("ToolbarItems", (h, t) =>
-					{
-						h.PlatformView.Superview.LayoutSubviews();
-					});
+						if (n.Parent is FlyoutPage)
+						{
+							n.CurrentPage.On<iOS>().SetUseSafeArea(true);
+						}
+				});
 #endif
 				});
 
