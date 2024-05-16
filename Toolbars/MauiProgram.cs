@@ -5,7 +5,9 @@ using Microsoft.Maui.Handlers;
 using FlyoutPage = Microsoft.Maui.Controls.FlyoutPage;
 using Microsoft.Maui.Controls.Handlers.Compatibility;
 using NavigationPage = Microsoft.Maui.Controls.NavigationPage;
+#if IOS
 using UIKit;
+#endif
 
 namespace Toolbars
 {
@@ -30,7 +32,7 @@ namespace Toolbars
 						{
 							n.CurrentPage.On<iOS>().SetUseSafeArea(true);
 						}
-				});
+					});
 #endif
 				});
 
