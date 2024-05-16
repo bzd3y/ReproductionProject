@@ -9,7 +9,7 @@
 			InitializeComponent();
 		}
 
-		private void OnCounterClicked(object sender, EventArgs e)
+		private async void OnCounterClicked(object sender, EventArgs e)
 		{
 			count++;
 
@@ -18,9 +18,9 @@
 			else
 				CounterBtn.Text = $"Clicked {count} times";
 
-			CounterBtn.Text = "dot net bot in a race car number eight dot net bot in a race car number eight dot net bot in a race car number eight dot net bot in a race car number eight";
-
 			SemanticScreenReader.Announce(CounterBtn.Text);
+
+			await Shell.Current.GoToAsync(nameof(TestPage));
 		}
 	}
 

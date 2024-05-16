@@ -1,14 +1,64 @@
-﻿using CoreGraphics;
-using Foundation;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 using Microsoft.Maui.Controls.Platform;
+using Microsoft.Maui.Graphics.Platform;
 using Microsoft.Maui.Handlers;
+using Microsoft.Maui.Layouts;
+using Microsoft.Maui.Platform;
+
+#if IOS
 using UIKit;
+using Foundation;
+using CoreGraphics;
+#endif
 
 namespace Buttons
 {
 	public static class MauiProgram
 	{
+#if IOS
+		public class WordWrapButtonHandler : ButtonHandler
+		{
+			public override Size GetDesiredSize(double widthConstraint, double heightConstraint)
+			{
+				Size desiredSize = base.GetDesiredSize(widthConstraint, heightConstraint);
+
+				if (VirtualView is Button button && button.HeightRequest == -1 && (button.LineBreakMode == LineBreakMode.WordWrap || button.LineBreakMode == LineBreakMode.CharacterWrap))
+				{
+					double width = widthConstraint - button.Padding.HorizontalThickness;
+
+					//if (PlatformView.ImageView.Bounds.Width > 0 && (button.ContentLayout.Position == Button.ButtonContentLayout.ImagePosition.Left || button.ContentLayout.Position == Button.ButtonContentLayout.ImagePosition.Right))
+					//{
+					//	width -= PlatformView.ImageView.Bounds.Width - button.ContentLayout.Spacing;
+					//}
+
+					CGSize size = new(width, heightConstraint);
+					NSAttributedString title = PlatformView.CurrentAttributedTitle ?? new NSAttributedString(PlatformView.CurrentTitle, new UIStringAttributes()
+					{
+						Font = PlatformView.TitleLabel.Font
+					});
+					CGRect bounds = title.GetBoundingRect(size, NSStringDrawingOptions.UsesLineFragmentOrigin | NSStringDrawingOptions.UsesFontLeading, null);
+					double height = bounds.Height;
+
+					//if (PlatformView.ImageView.Bounds.Height > 0)
+					//{
+					//	if (button.ContentLayout.Position == Button.ButtonContentLayout.ImagePosition.Top || button.ContentLayout.Position == Button.ButtonContentLayout.ImagePosition.Bottom)
+					//	{
+					//		height = PlatformView.ImageView.Bounds.Height + button.ContentLayout.Spacing + height;
+					//	}
+					//	else if (button.ContentLayout.Position == Button.ButtonContentLayout.ImagePosition.Left || button.ContentLayout.Position == Button.ButtonContentLayout.ImagePosition.Right)
+					//	{
+					//		height = Math.Max(PlatformView.ImageView.Bounds.Height, height);
+					//	}
+					//}
+
+					desiredSize.Height = height + button.Padding.VerticalThickness;
+				}
+
+				return desiredSize;
+			}
+		}
+#endif
+
 		public static MauiApp CreateMauiApp()
 		{
 			var builder = MauiApp.CreateBuilder();
@@ -18,62 +68,18 @@ namespace Buttons
 				{
 					fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
 					fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
-				});
-
-#if IOS
-			ButtonHandler.Mapper.PrependToMapping("ButtonSizing", (h, b) =>
-			{
-				if (b is Button button)
+				})
+				.ConfigureMauiHandlers(h =>
 				{
-					UIView super = h.PlatformView.Superview;
+#if IOS
+					h.AddHandler(typeof(Button), typeof(WordWrapButtonHandler));
 
-					super.AddConstraint(NSLayoutConstraint.Create(h.PlatformView.TitleLabel, NSLayoutAttribute.Width, NSLayoutRelation.LessThanOrEqual, h.PlatformView.TitleLabel, NSLayoutAttribute.Width, 1, 0));
-					super.AddConstraint(NSLayoutConstraint.Create(h.PlatformView, NSLayoutAttribute.Height, NSLayoutRelation.GreaterThanOrEqual, h.PlatformView.TitleLabel, NSLayoutAttribute.Height, 1, 0));
-				}
-			});
+					//ButtonHandler.CommandMapper.AppendToMapping(nameof(IView.InvalidateMeasure), (h, b, o) =>
+					//{
 
-			//ButtonHandler.Mapper.AppendToMapping(nameof(Button.Text), (h, b) =>
-			//{
-			//	try
-			//	{
-			//		if (b is Button button && h.PlatformView.CurrentTitle != null && h.PlatformView.TitleLabel.LineBreakMode == UILineBreakMode.WordWrap)
-			//		{
-			//			//UIStringAttributes attributes = new()
-			//			//{
-			//			//	Font = h.PlatformView.TitleLabel.Font
-			//			//};
-			//			//NSStringDrawingOptions drawingOptions = NSStringDrawingOptions.UsesLineFragmentOrigin | NSStringDrawingOptions.UsesFontLeading;
-			//			//NSAttributedString title = h.PlatformView.CurrentAttributedTitle ?? new NSAttributedString(h.PlatformView.CurrentTitle, attributes);
-			//			//CGRect unconstrainedBounds = title.GetBoundingRect(new CGSize(double.MaxValue, double.MaxValue), drawingOptions, null);
-			//			//CGRect constrainedBounds = title.GetBoundingRect(new CGSize(button.Width - button.Padding.HorizontalThickness, double.MaxValue), drawingOptions, null);
-			//			//double difference = constrainedBounds.Height - unconstrainedBounds.Height;
-
-			//			//if (button.Height < constrainedBounds.Height)
-			//			//{
-			//			//	button.MinimumHeightRequest = button.Height + difference;
-			//			//}
-
-			//			//h.PlatformView.RemoveConstraint(
-
-			//			//if (string.IsNullOrEmpty(h.PlatformView.TitleLabel.Text) == false)
-			//			//{
-			//			//	//UIStringAttributes? attributes = h.PlatformView.TitleLabel.AttributedText?.GetUIKitAttributes(0, out NSRange effectiveRangs);
-			//			//	//CGRect unconstrainedBounds = ((NSString)h.PlatformView.TitleLabel.Text).GetBoundingRect(new CGSize(double.MaxValue, double.MaxValue), NSStringDrawingOptions.UsesLineFragmentOrigin, attributes ?? new(), null);
-			//			//	//CGRect constrainedBounds = ((NSString)h.PlatformView.TitleLabel.Text).GetBoundingRect(new CGSize(button.Width - button.Padding.HorizontalThickness, double.MaxValue), NSStringDrawingOptions.UsesLineFragmentOrigin, attributes ?? new(), null);
-			//			//	//double difference = button.Height - unconstrainedBounds.Height;
-
-			//			//	//button.HeightRequest = Math.Max(button.Height, constrainedBounds.Height + difference);
-
-			//			//	CGSize size = h.PlatformView.SizeThatFits(h.PlatformView.TitleLabel.Bounds.Size);
-			//			//}
-			//		}
-			//	}
-			//	catch (Exception ex)
-			//	{
-
-			//	}
-			//});
+					//});
 #endif
+				});
 
 #if DEBUG
 			builder.Logging.AddDebug();
