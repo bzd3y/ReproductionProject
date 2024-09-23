@@ -23,7 +23,9 @@ Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "OSVersion.Shared", "OSVersi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Buttons", "Buttons\Buttons.csproj", "{6D113393-CCC7-4547-B6BF-CCB744F47FB5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LineStaging", "LineStaging\LineStaging.csproj", "{83F10D3D-9C70-49A7-B091-36C200622082}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LineStaging", "LineStaging\LineStaging.csproj", "{83F10D3D-9C70-49A7-B091-36C200622082}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PickerUnfocused", "PickerUnfocused\PickerUnfocused.csproj", "{CEDA8AA7-4543-460E-8CDD-84ECD5358296}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -89,6 +91,12 @@ Global
 		{83F10D3D-9C70-49A7-B091-36C200622082}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{83F10D3D-9C70-49A7-B091-36C200622082}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{83F10D3D-9C70-49A7-B091-36C200622082}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CEDA8AA7-4543-460E-8CDD-84ECD5358296}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CEDA8AA7-4543-460E-8CDD-84ECD5358296}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CEDA8AA7-4543-460E-8CDD-84ECD5358296}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{CEDA8AA7-4543-460E-8CDD-84ECD5358296}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CEDA8AA7-4543-460E-8CDD-84ECD5358296}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CEDA8AA7-4543-460E-8CDD-84ECD5358296}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
