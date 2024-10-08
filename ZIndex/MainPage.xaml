@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ZIndex.MainPage">
+
+	<Grid ColumnDefinitions="*, *" RowDefinitions="*, *">
+		<Button Grid.Row="0" Grid.Column="0"></Button>
+		<Button Grid.Row="0" Grid.Column="1"></Button>
+		<AbsoluteLayout x:Name="surveysButton" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="0, 18">
+			<!--<AbsoluteLayout.Triggers>
+			<MultiTrigger TargetType="AbsoluteLayout">
+				<MultiTrigger.Conditions>
+					<BindingCondition Binding="{Binding IsVisible, Source={x:Reference label}}" Value="False" />
+					<BindingCondition Binding="{Binding IsVisible, Source={x:Reference label}}" Value="False" />
+				</MultiTrigger.Conditions>
+				<Setter Property="Grid.Row" Value="0" />
+				<Setter Property="Grid.RowSpan" Value="2" />
+			</MultiTrigger>
+		</AbsoluteLayout.Triggers>-->
+			<Button Text="Button" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, 0, 1, 1" />
+			<Border
+			x:Name="count"
+			BackgroundColor="Green"
+			Stroke="Red"
+			StrokeShape="Ellipse"
+			StrokeThickness="2"
+			Padding="6"
+			WidthRequest="{Binding Height, Source={Reference count}}"
+			AbsoluteLayout.LayoutFlags="PositionProportional"
+			AbsoluteLayout.LayoutBounds=".975, .025, AutoSize, AutoSize">
+				<Label x:Name="label" Text="1" TextColor="White" VerticalOptions="Center" HorizontalOptions="Center"/>
+			</Border>
+		</AbsoluteLayout>
+	</Grid>
+</ContentPage>
