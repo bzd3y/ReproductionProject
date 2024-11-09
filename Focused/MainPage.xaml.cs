@@ -40,6 +40,11 @@
 		{
 
 		}
+
+		private void Entry_Unfocused(object sender, FocusEventArgs e)
+		{
+
+		}
 	}
 
 }
